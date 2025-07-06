@@ -7,20 +7,21 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import CreateEvent from './pages/CreateEvent';
-import './App.css';
+import Makro from './pages/Makro';
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="text-left min-h-screen w-full overflow-x-hidden">
         <Header />
-        <div className="app-content">
+        <div className="pt-18 min-h-screen-minus-18">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-event" element={<CreateEvent />} />
+            <Route path="/makro" element={<Makro />} />
           </Routes>
         </div>
       </div>

@@ -1,26 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Configuraciones móviles específicas */
+html {
+  font-size: 16px; /* Prevenir zoom en inputs en iOS */
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
-  overflow-x: hidden;
-  /* Prevenir zoom en iOS */
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-/* Configuración para dispositivos móviles */
-html {
-  /* Prevenir zoom en inputs en iOS */
-  font-size: 16px;
+  overflow-x: hidden;
 }
 
 /* Mejorar el rendimiento de scroll en iOS */

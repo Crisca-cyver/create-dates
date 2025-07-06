@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/config';
-import './Auth.css';
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -34,18 +33,18 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <div className="auth-header">
-          <h1>Crear Cuenta</h1>
-          <p>Únete a CreateDates y organiza tus eventos</p>
+    <div className="min-h-screen flex items-center justify-center p-5 bg-gradient-to-br from-blue-500 to-purple-600">
+      <div className="bg-white rounded-2xl p-8 w-full max-w-md shadow-2xl">
+        <div className="text-center mb-8">
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">Crear Cuenta</h1>
+          <p className="text-gray-600">Únete a CreateDates y organiza tus eventos</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="auth-form">
-          {error && <div className="error-message">{error}</div>}
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          {error && <div className="bg-red-100 text-red-700 p-3 rounded-lg text-sm border border-red-200">{error}</div>}
           
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="email" className="font-semibold text-gray-700 text-sm">Email</label>
             <input
               type="email"
               id="email"
@@ -53,11 +52,12 @@ const Register: React.FC = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="tu@email.com"
               required
+              className="p-4 border-2 border-gray-200 rounded-xl text-base transition-colors focus:border-blue-500 focus:outline-none bg-gray-50"
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="password">Contraseña</label>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="password" className="font-semibold text-gray-700 text-sm">Contraseña</label>
             <input
               type="password"
               id="password"
@@ -66,11 +66,12 @@ const Register: React.FC = () => {
               placeholder="Mínimo 6 caracteres"
               required
               minLength={6}
+              className="p-4 border-2 border-gray-200 rounded-xl text-base transition-colors focus:border-blue-500 focus:outline-none bg-gray-50"
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirmar Contraseña</label>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="confirmPassword" className="font-semibold text-gray-700 text-sm">Confirmar Contraseña</label>
             <input
               type="password"
               id="confirmPassword"
@@ -78,26 +79,27 @@ const Register: React.FC = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Repite tu contraseña"
               required
+              className="p-4 border-2 border-gray-200 rounded-xl text-base transition-colors focus:border-blue-500 focus:outline-none bg-gray-50"
             />
           </div>
 
           <button 
             type="submit" 
-            className="btn btn-primary"
+            className="p-4 rounded-xl font-semibold text-base transition-all duration-300 bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:-translate-y-1 hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
             disabled={loading}
           >
             {loading ? 'Creando cuenta...' : 'Crear Cuenta'}
           </button>
         </form>
 
-        <div className="auth-footer">
-          <p>
+        <div className="mt-6 text-center flex flex-col gap-3">
+          <p className="text-gray-600 text-sm">
             ¿Ya tienes cuenta?{' '}
-            <Link to="/login" className="link">
+            <Link to="/login" className="text-blue-600 font-semibold transition-colors hover:text-blue-700">
               Inicia sesión aquí
             </Link>
           </p>
-          <Link to="/" className="link">
+          <Link to="/" className="text-blue-600 font-semibold transition-colors hover:text-blue-700">
             ← Volver al inicio
           </Link>
         </div>
