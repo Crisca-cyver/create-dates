@@ -1,13 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Layout from './components/Layout';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import CreateEvent from './pages/CreateEvent';
 import Makro from './pages/Makro';
+import Yaguar from './pages/Yaguar';
+import MaxiCarrefour from './pages/MaxiCarrefour';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-event" element={<CreateEvent />} />
             <Route path="/makro" element={<Makro />} />
+            <Route path="/yaguar" element={<Yaguar />} />
+            <Route path="/maxi-carrefour" element={<MaxiCarrefour />} />
           </Routes>
         </div>
       </div>
