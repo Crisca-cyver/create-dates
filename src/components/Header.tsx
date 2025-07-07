@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
+import { logoutUser } from '../firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import SideMenu from './SideMenu';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -10,6 +15,15 @@ const Header: React.FC = () => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+      navigate('/');
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
   };
 
   return (
@@ -27,7 +41,23 @@ const Header: React.FC = () => {
           
           <h1 className="text-lg font-bold text-center flex-1">Generador de Datos</h1>
           
-          <div className="w-10 h-10"></div>
+          <div className="flex items-center gap-3">
+            {user ? (
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-300 hidden sm:block">
+                  {user.email}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg text-sm transition-colors"
+                >
+                  Salir
+                </button>
+              </div>
+            ) : (
+              <div className="w-10 h-10"></div>
+            )}
+          </div>
         </div>
       </header>
       

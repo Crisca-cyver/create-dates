@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { checkFirebaseConfig, testFirebaseConnection } from '../utils/testFirebase';
 
 const Home: React.FC = () => {
+  useEffect(() => {
+    // Probar Firebase al cargar la página
+    const testConnection = async () => {
+      const isConfigured = checkFirebaseConfig();
+      if (isConfigured) {
+        await testFirebaseConnection();
+      }
+    };
+    
+    testConnection();
+  }, []);
+
   return (
     <div className="min-h-screen p-5 flex flex-col justify-between bg-gradient-to-br from-blue-500 to-purple-600 text-white">
       <div className="text-center mt-15 mb-10">

@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -12,23 +14,33 @@ import MaxiCarrefour from './pages/MaxiCarrefour';
 
 function App() {
   return (
-    <Router>
-      <div className="text-left min-h-screen w-full overflow-x-hidden">
-        <Header />
-        <div className="pt-18 min-h-screen-minus-18">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/create-event" element={<CreateEvent />} />
-            <Route path="/makro" element={<Makro />} />
-            <Route path="/yaguar" element={<Yaguar />} />
-            <Route path="/maxi-carrefour" element={<MaxiCarrefour />} />
-          </Routes>
+    <AuthProvider>
+      <Router>
+        <div className="text-left min-h-screen w-full overflow-x-hidden">
+          <Header />
+          <div className="pt-18 min-h-screen-minus-18">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/dashboard" element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/create-event" element={
+                <ProtectedRoute>
+                  <CreateEvent />
+                </ProtectedRoute>
+              } />
+              <Route path="/makro" element={<Makro />} />
+              <Route path="/yaguar" element={<Yaguar />} />
+              <Route path="/maxi-carrefour" element={<MaxiCarrefour />} />
+            </Routes>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 
