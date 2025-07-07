@@ -1,21 +1,24 @@
 # CreateDates - Aplicación Móvil de Eventos
 
-Una aplicación web optimizada para móvil que permite crear y gestionar eventos de manera fácil y intuitiva.
+Una aplicación web optimizada para móvil que permite crear y gestionar eventos de manera fácil e intuitiva, con un diseño moderno usando Tailwind CSS.
 
 ## 🚀 Características
 
 - **Diseño Móvil-First**: Optimizada completamente para dispositivos móviles
 - **Autenticación con Firebase**: Sistema de login y registro seguro
 - **Gestión de Eventos**: Crear, ver y organizar eventos
-- **Interfaz Moderna**: Diseño limpio y responsive
+- **Interfaz Moderna**: Diseño limpio y responsive con Tailwind CSS
 - **Base de Datos en Tiempo Real**: Firebase Firestore para sincronización
+- **Páginas Especializadas**: Makro, Yaguar y Maxi-Carrefour con funcionalidades específicas
+- **Despliegue Automático**: Configurado para Vercel
 
 ## 📱 Tecnologías Utilizadas
 
 - **React 18** con TypeScript
 - **React Router** para navegación
 - **Firebase** (Auth, Firestore)
-- **CSS3** con diseño móvil optimizado
+- **Tailwind CSS** para estilos modernos y responsive
+- **PostCSS** y **Autoprefixer** para optimización
 
 ## 🛠️ Configuración
 
@@ -61,27 +64,38 @@ La aplicación se abrirá en `http://localhost:3000`
 ```
 src/
 ├── components/          # Componentes reutilizables
-│   ├── Layout.tsx      # Layout principal
-│   └── Layout.css
+│   ├── Layout.tsx      # Layout principal con menú lateral
+│   ├── Header.tsx      # Header de la aplicación
+│   └── SideMenu.tsx    # Menú lateral responsive
 ├── pages/              # Páginas de la aplicación
 │   ├── Home.tsx        # Página de inicio
 │   ├── Login.tsx       # Página de login
 │   ├── Register.tsx    # Página de registro
 │   ├── Dashboard.tsx   # Dashboard principal
 │   ├── CreateEvent.tsx # Crear eventos
-│   └── *.css           # Estilos de cada página
+│   ├── Makro.tsx       # Página especializada Makro
+│   ├── Yaguar.tsx      # Página especializada Yaguar
+│   └── MaxiCarrefour.tsx # Página especializada Maxi-Carrefour
 ├── firebase/           # Configuración de Firebase
 │   └── config.ts
-└── App.tsx             # Componente principal
+├── App.tsx             # Componente principal con rutas
+├── index.css           # Estilos globales con Tailwind
+├── tailwind.config.js  # Configuración de Tailwind CSS
+└── postcss.config.js   # Configuración de PostCSS
 ```
 
-## 🎨 Características de Diseño Móvil
+## 🎨 Características de Diseño
 
-- **Viewport Optimizado**: Configurado para dispositivos móviles
-- **Touch-Friendly**: Botones y elementos optimizados para touch
-- **Safe Area**: Soporte para dispositivos con notch
-- **Responsive**: Adaptable a diferentes tamaños de pantalla
-- **Performance**: Optimizado para rendimiento móvil
+### Tailwind CSS
+- **Diseño Moderno**: Utilizando clases de utilidad de Tailwind CSS
+- **Responsive**: Diseño adaptable a todos los dispositivos
+- **Componentes Reutilizables**: Botones, cards y elementos consistentes
+- **Animaciones**: Transiciones suaves y efectos visuales
+
+### Páginas Especializadas
+- **Makro**: Desplegables para selección de productos y categorías
+- **Yaguar**: Sistema de desplegables con opciones específicas
+- **Maxi-Carrefour**: Interfaz para gestión de productos
 
 ## 🔧 Scripts Disponibles
 
@@ -100,36 +114,72 @@ src/
 4. **Dashboard** (`/dashboard`) - Ver eventos del usuario
 5. **Create Event** (`/create-event`) - Crear nuevo evento
 
-### Gestión de Eventos
+### Páginas Especializadas
 
-- Crear eventos con título, fecha, hora, ubicación y descripción
-- Ver lista de eventos en el dashboard
-- Navegación intuitiva entre páginas
-- Interfaz optimizada para móvil
+6. **Makro** (`/makro`) - Gestión de productos Makro con desplegables
+7. **Yaguar** (`/yaguar`) - Gestión de productos Yaguar con desplegables
+8. **Maxi-Carrefour** (`/maxi-carrefour`) - Gestión de productos Maxi-Carrefour
+
+### Características Avanzadas
+
+- **Menú Lateral**: Navegación responsive con animaciones
+- **Desplegables Dinámicos**: Selección de productos y categorías
+- **Autenticación Segura**: Sistema de login/registro con Firebase
+- **Gestión de Estado**: Hooks optimizados para evitar warnings
 
 ## 🚀 Despliegue
 
-Para desplegar la aplicación:
+### Despliegue en Vercel
 
-1. Construir la aplicación:
+La aplicación está configurada para despliegue automático en Vercel:
+
+1. **Configuración Automática**: El archivo `vercel.json` está configurado
+2. **Build Optimizado**: Configuración para React y Tailwind CSS
+3. **Despliegue Continuo**: Integración con GitHub para despliegue automático
+
+### Comandos de Despliegue
+
 ```bash
+# Instalar Vercel CLI
+npm i -g vercel
+
+# Desplegar
+vercel --prod
+
+# O construir y desplegar manualmente
 npm run build
+vercel --prod
 ```
 
-2. Los archivos de producción estarán en la carpeta `build/`
+### Otras Plataformas
 
-3. Puedes desplegar en:
-   - Firebase Hosting
-   - Netlify
-   - Vercel
-   - GitHub Pages
+También puedes desplegar en:
+- Firebase Hosting
+- Netlify
+- GitHub Pages
 
 ## 📝 Notas de Desarrollo
 
-- La aplicación está optimizada para dispositivos móviles
-- Utiliza Firebase para autenticación y base de datos
-- Diseño responsive con CSS moderno
-- Navegación fluida entre páginas
+### Migración a Tailwind CSS
+- ✅ Eliminados todos los archivos CSS personalizados
+- ✅ Migrados todos los estilos a clases de Tailwind
+- ✅ Configuración optimizada de PostCSS y Autoprefixer
+- ✅ Diseño responsive y moderno
+
+### Mejoras Recientes
+- ✅ Páginas especializadas con funcionalidades específicas
+- ✅ Sistema de desplegables dinámicos
+- ✅ Menú lateral con animaciones suaves
+- ✅ Configuración de Vercel para despliegue automático
+- ✅ Corrección de warnings de ESLint y hooks
+
+## 🎯 Próximas Mejoras
+
+- [ ] Integración con APIs de productos
+- [ ] Sistema de notificaciones push
+- [ ] Modo offline con Service Workers
+- [ ] PWA (Progressive Web App)
+- [ ] Tests automatizados
 
 ## 🤝 Contribuir
 
@@ -142,3 +192,10 @@ npm run build
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.
+
+## 🔗 Enlaces Útiles
+
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Firebase Documentation](https://firebase.google.com/docs)
+- [React Router Documentation](https://reactrouter.com/docs)
+- [Vercel Documentation](https://vercel.com/docs)
