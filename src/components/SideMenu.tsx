@@ -55,12 +55,6 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
               </a>
             </li>
             <li className="m-0">
-              <a href="/admin-products" className="flex items-center p-4 text-white no-underline transition-colors duration-300 border-b border-gray-700 hover:bg-gray-700">
-                <span className="mr-3 text-xl w-6 text-center">📦</span>
-                Administrar Productos
-              </a>
-            </li>
-            <li className="m-0">
               <a href="/settings" className="flex items-center p-4 text-white no-underline transition-colors duration-300 border-b border-gray-700 hover:bg-gray-700">
                 <span className="mr-3 text-xl w-6 text-center">⚙️</span>
                 Configuración
