@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
+import ProductList from '../components/ProductList';
 
 const Makro: React.FC = () => {
-  const [selectedOption, setSelectedOption] = useState('');
-  const [selectedLoreal, setSelectedLoreal] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedBrand, setSelectedBrand] = useState('');
+  const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
 
-  const options = [
+  const categories = [
+    'Cosméticos',
+    'Cuidado Personal',
+    'Higiene',
+    'Belleza',
+    'Cabello',
+    'Piel'
+  ];
+
+  const brands = [
     'Loreal',
     'Molinos Cañuelas',
     'Edra',
@@ -15,91 +26,101 @@ const Makro: React.FC = () => {
     'Yovinessa'
   ];
 
-  const lorealOptions = [
-    'Elvive',
-    'Fructis',
-    'Nutrisse',
-    'Excellence',
-    'Cor'
-  ];
-
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(e.target.value);
-    setSelectedLoreal(''); // Reset loreal select if main changes
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(e.target.value);
+    setSelectedBrand('');
+    setSelectedProducts([]);
   };
 
-  const handleLorealChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedLoreal(e.target.value);
+  const handleBrandChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedBrand(e.target.value);
+    setSelectedProducts([]);
+  };
+
+  const handleSelectionChange = (products: string[]) => {
+    setSelectedProducts(products);
   };
 
   return (
     <div className="min-h-screen bg-gray-50 p-5">
       <div className="text-center mb-8 p-5 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl text-white">
         <h1 className="text-3xl font-bold mb-2">Makro</h1>
-        <p className="text-lg opacity-90 m-0">Generador de datos para Makro</p>
+        <p className="text-lg opacity-90 m-0">Gestión de productos para Makro</p>
       </div>
       
       <div className="flex flex-col gap-5">
+        {/* Filtros */}
         <div className="bg-white rounded-2xl p-6 shadow-lg">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Selecciona una opción</h2>
+          <h2 className="text-xl font-bold text-gray-800 mb-4">Filtros</h2>
           
-          <div className="flex flex-col gap-3">
-            <label htmlFor="makro-select" className="font-semibold text-gray-700 text-sm">
-              Empresa:
-            </label>
-            
-            <select
-              id="makro-select"
-              value={selectedOption}
-              onChange={handleSelectChange}
-              className="p-4 border-2 border-gray-200 rounded-xl text-base transition-colors focus:border-blue-500 focus:outline-none bg-gray-50"
-            >
-              <option value="">Selecciona una empresa...</option>
-              {options.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="category-select" className="font-semibold text-gray-700 text-sm block mb-2">
+                Categoría:
+              </label>
+              <select
+                id="category-select"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                className="w-full p-4 border-2 border-gray-200 rounded-xl text-base transition-colors focus:border-blue-500 focus:outline-none bg-gray-50"
+              >
+                <option value="">Todas las categorías</option>
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            {/* Segundo desplegable solo si es Loreal */}
-            {selectedOption === 'Loreal' && (
-              <div className="flex flex-col gap-3 mt-4">
-                <label htmlFor="loreal-select" className="font-semibold text-gray-700 text-sm">
-                  Producto Loreal:
-                </label>
-                <select
-                  id="loreal-select"
-                  value={selectedLoreal}
-                  onChange={handleLorealChange}
-                  className="p-4 border-2 border-gray-200 rounded-xl text-base transition-colors focus:border-blue-500 focus:outline-none bg-gray-50"
-                >
-                  <option value="">Selecciona un producto...</option>
-                  {lorealOptions.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-
-            {selectedOption && (
-              <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl">
-                <p className="text-blue-800 font-semibold">
-                  Seleccionaste: <span className="text-blue-600">{selectedOption}</span>
-                  {selectedOption === 'Loreal' && selectedLoreal && (
-                    <span> &rarr; <span className="text-purple-600">{selectedLoreal}</span></span>
-                  )}
-                </p>
-                <p className="text-blue-700 text-sm mt-2">
-                  Funcionalidades próximas para {selectedOption}
-                  {selectedOption === 'Loreal' && selectedLoreal ? ` (${selectedLoreal})` : ''}...
-                </p>
-              </div>
-            )}
+            <div>
+              <label htmlFor="brand-select" className="font-semibold text-gray-700 text-sm block mb-2">
+                Marca:
+              </label>
+              <select
+                id="brand-select"
+                value={selectedBrand}
+                onChange={handleBrandChange}
+                className="w-full p-4 border-2 border-gray-200 rounded-xl text-base transition-colors focus:border-blue-500 focus:outline-none bg-gray-50"
+              >
+                <option value="">Todas las marcas</option>
+                {brands.map((brand) => (
+                  <option key={brand} value={brand}>
+                    {brand}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
+
+          {/* Información de filtros activos */}
+          {(selectedCategory || selectedBrand) && (
+            <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl">
+              <p className="text-blue-800 font-semibold">
+                Filtros activos:
+                {selectedCategory && (
+                  <span className="text-blue-600 ml-2">Categoría: {selectedCategory}</span>
+                )}
+                {selectedBrand && (
+                  <span className="text-purple-600 ml-2">Marca: {selectedBrand}</span>
+                )}
+              </p>
+              {selectedProducts.length > 0 && (
+                <p className="text-blue-700 text-sm mt-2">
+                  Productos seleccionados: {selectedProducts.length}
+                </p>
+              )}
+            </div>
+          )}
         </div>
+
+        {/* Lista de productos */}
+        <ProductList
+          category={selectedCategory || undefined}
+          brand={selectedBrand || undefined}
+          title="Productos Makro"
+          onSelectionChange={handleSelectionChange}
+        />
       </div>
     </div>
   );

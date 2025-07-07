@@ -9,6 +9,7 @@ import CreateEvent from './pages/CreateEvent';
 import Makro from './pages/Makro';
 import Yaguar from './pages/Yaguar';
 import MaxiCarrefour from './pages/MaxiCarrefour';
+import AdminProducts from './pages/AdminProducts';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/makro" element={<Makro />} />
             <Route path="/yaguar" element={<Yaguar />} />
             <Route path="/maxi-carrefour" element={<MaxiCarrefour />} />
+            <Route path="/admin-products" element={<AdminProducts />} />
           </Routes>
         </div>
       </div>
